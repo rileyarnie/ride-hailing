@@ -22,7 +22,7 @@ if (!rootElement.innerHTML) {
   const root = createRoot(rootElement);
   root.render(
     <StrictMode>
-      <ThemeProvider defaultTheme="system" storageKey="application-theme">
+      <ThemeProvider defaultTheme="light" storageKey="application-theme">
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
           <ReactQueryDevtools initialIsOpen={false} />
