@@ -1,10 +1,10 @@
-import { Button } from "../components/ui/button";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const HomePage = () => {
   return (
     <div>
-      HomePage
-      <Button>Hello button</Button>
+      <h2 className="text-3xl">Available Rides</h2>
+      <ModeToggle />
     </div>
   );
 };
