@@ -1,5 +1,6 @@
+import AvailableRidesTable from "@/components/available-rides/RidesTable";
 import { getAvailableRides } from "@/queries/getRides";
-import { Ride } from "@/types/Ride";
+// import { Ride } from "@/types/Ride";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 const HomePage = () => {
@@ -7,9 +8,10 @@ const HomePage = () => {
   return (
     <div>
       <h2 className="text-3xl">Available Rides</h2>
-      {availableRides?.map((ride: Ride) => (
+      {/* {availableRides?.map((ride: Ride) => (
         <div key={ride.id}>{ride.driverName}</div>
-      ))}
+      ))} */}
+      <AvailableRidesTable data={availableRides} />
     </div>
   );
 };
