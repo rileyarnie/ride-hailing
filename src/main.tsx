@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { routeTree } from "./routeTree.gen";
 import { ThemeProvider } from "./components/theme-provider";
+import { RideProvider } from "./context/RideContext";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +29,9 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <ThemeProvider defaultTheme="light" storageKey="application-theme">
         <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
+          <RideProvider>
+            <RouterProvider router={router} />
+          </RideProvider>
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </ThemeProvider>

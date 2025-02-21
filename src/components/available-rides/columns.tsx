@@ -1,7 +1,9 @@
 import { Ride } from "@/types/Ride";
 import { ColumnDef } from "@tanstack/react-table";
-import { Button } from "../ui/button";
 import { Star } from "lucide-react";
+import AlertModal from "../AlertModal";
+import { useRide } from "@/context/RideContext";
+import { Button } from "../ui/button";
 
 export const columns: ColumnDef<Ride>[] = [
   {
@@ -48,6 +50,10 @@ export const columns: ColumnDef<Ride>[] = [
     },
   },
   {
+    accessorKey: "id",
+    header: "",
+  },
+  {
     accessorKey: "pickupLocation",
     header: "Pickup Point",
   },
@@ -82,16 +88,33 @@ export const columns: ColumnDef<Ride>[] = [
   {
     accessorKey: "",
     header: "Actions",
-    cell: ({ row }) => {
+    cell: function CellComponent({ row }) {
+      const rideId = row.getValue("id") as string;
       const price = row.getValue("estimatedFare") as string;
-      console.log("price", price);
+      const driver = row.getValue("driverName") as string;
+      const pickupLocation = row.getValue("pickupLocation") as string;
+      const destination = row.getValue("destination") as string;
+      const { rideHistory, bookRide } = useRide();
+      const rideBooked = rideHistory?.some(
+        (ride) => ride.id === Number(rideId)
+      );
+
       return (
-        <Button
-          className="cursor-pointer"
-          onClick={() => alert(`Booking ride, ${price}`)}
-        >
-          Book Ride
-        </Button>
+        <>
+          {/* <p>{rideBooked}</p> */}
+          {rideBooked ? (
+            <Button disabled>Ride booked</Button>
+          ) : (
+            <AlertModal
+              name="Book ride"
+              title={`Book ride ?`}
+              message={` You are about to book a ride with ${driver} from ${pickupLocation} to ${destination} for KES ${price}`}
+              onSubmit={() => {
+                bookRide(row.original);
+              }}
+            />
+          )}
+        </>
       );
     },
   },
