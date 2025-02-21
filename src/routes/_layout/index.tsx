@@ -1,4 +1,4 @@
-import Loader from "@/components/loader/Loader";
+import Loader from "@/components/loader/loader";
 import { Button } from "@/components/ui/button";
 import HomePage from "@/pages/HomePage";
 import { getAvailableRides } from "@/queries/getRides";
