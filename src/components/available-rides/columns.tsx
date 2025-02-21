@@ -103,7 +103,9 @@ export const columns: ColumnDef<Ride>[] = [
         <>
           {/* <p>{rideBooked}</p> */}
           {rideBooked ? (
-            <Button disabled>Ride booked</Button>
+            <Button className="w-full capitalize" disabled>
+              Ride booked
+            </Button>
           ) : (
             <AlertModal
               name="Book ride"

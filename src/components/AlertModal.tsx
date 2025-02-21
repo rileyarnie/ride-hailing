@@ -21,7 +21,7 @@ interface Iprops {
 const AlertModal: React.FC<Iprops> = ({ name, title, message, onSubmit }) => {
   return (
     <AlertDialog>
-      <Button asChild>
+      <Button className="w-full" asChild>
         <AlertDialogTrigger>{name}</AlertDialogTrigger>
       </Button>
       <AlertDialogContent>
