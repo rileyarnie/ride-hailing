@@ -14,10 +14,10 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as LayoutImport } from './routes/_layout'
+import { Route as LayoutIndexImport } from './routes/_layout/index'
 
 // Create Virtual Routes
 
-const LayoutIndexLazyImport = createFileRoute('/_layout/')()
 const LayoutHistoryLazyImport = createFileRoute('/_layout/history')()
 
 // Create/Update Routes
@@ -27,11 +27,11 @@ const LayoutRoute = LayoutImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const LayoutIndexLazyRoute = LayoutIndexLazyImport.update({
+const LayoutIndexRoute = LayoutIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => LayoutRoute,
-} as any).lazy(() => import('./routes/_layout/index.lazy').then((d) => d.Route))
+} as any)
 
 const LayoutHistoryLazyRoute = LayoutHistoryLazyImport.update({
   id: '/history',
@@ -63,7 +63,7 @@ declare module '@tanstack/react-router' {
       id: '/_layout/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof LayoutIndexLazyImport
+      preLoaderRoute: typeof LayoutIndexImport
       parentRoute: typeof LayoutImport
     }
   }
@@ -73,12 +73,12 @@ declare module '@tanstack/react-router' {
 
 interface LayoutRouteChildren {
   LayoutHistoryLazyRoute: typeof LayoutHistoryLazyRoute
-  LayoutIndexLazyRoute: typeof LayoutIndexLazyRoute
+  LayoutIndexRoute: typeof LayoutIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
   LayoutHistoryLazyRoute: LayoutHistoryLazyRoute,
-  LayoutIndexLazyRoute: LayoutIndexLazyRoute,
+  LayoutIndexRoute: LayoutIndexRoute,
 }
 
 const LayoutRouteWithChildren =
@@ -87,19 +87,19 @@ const LayoutRouteWithChildren =
 export interface FileRoutesByFullPath {
   '': typeof LayoutRouteWithChildren
   '/history': typeof LayoutHistoryLazyRoute
-  '/': typeof LayoutIndexLazyRoute
+  '/': typeof LayoutIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/history': typeof LayoutHistoryLazyRoute
-  '/': typeof LayoutIndexLazyRoute
+  '/': typeof LayoutIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_layout': typeof LayoutRouteWithChildren
   '/_layout/history': typeof LayoutHistoryLazyRoute
-  '/_layout/': typeof LayoutIndexLazyRoute
+  '/_layout/': typeof LayoutIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -144,7 +144,7 @@ export const routeTree = rootRoute
       "parent": "/_layout"
     },
     "/_layout/": {
-      "filePath": "_layout/index.lazy.tsx",
+      "filePath": "_layout/index.tsx",
       "parent": "/_layout"
     }
   }

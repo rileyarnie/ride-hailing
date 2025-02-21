@@ -8,8 +8,12 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { routeTree } from "./routeTree.gen";
 import { ThemeProvider } from "./components/theme-provider";
 
-const router = createRouter({ routeTree });
 const queryClient = new QueryClient();
+
+const router = createRouter({
+  routeTree,
+  context: { queryClient },
+});
 
 declare module "@tanstack/react-router" {
   interface Register {

@@ -257,5 +257,3 @@ export const rides: Ride[] = [
     eta: 7,
   },
 ];
-
-console.log(rides);
