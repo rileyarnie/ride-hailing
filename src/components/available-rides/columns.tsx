@@ -4,6 +4,7 @@ import { Star } from "lucide-react";
 import AlertModal from "../AlertModal";
 import { useRide } from "@/context/RideContext";
 import { Button } from "../ui/button";
+import { toast } from "sonner";
 
 export const columns: ColumnDef<Ride>[] = [
   {
@@ -52,6 +53,7 @@ export const columns: ColumnDef<Ride>[] = [
   {
     accessorKey: "id",
     header: "",
+    cell: () => {},
   },
   {
     accessorKey: "pickupLocation",
@@ -113,6 +115,9 @@ export const columns: ColumnDef<Ride>[] = [
               message={` You are about to book a ride with ${driver} from ${pickupLocation} to ${destination} for KES ${price}`}
               onSubmit={() => {
                 bookRide(row.original);
+                toast(
+                  ` Your ride with ${driver} from ${pickupLocation} to ${destination} has been booked for KES ${price}`
+                );
               }}
             />
           )}
