@@ -12,7 +12,7 @@ const HomePage = () => {
       <h2 className="text-3xl">Available Rides</h2>
       <div className="lg:hidden grid auto-rows-min gap-4 md:grid-cols-2 lg:grid-cols-3 items-center py-4">
         {availableRides.map((ride: Ride) => (
-          <RideCard ride={ride} />
+          <RideCard key={ride.id} ride={ride} />
         ))}
       </div>
       <div className="hidden lg:block">

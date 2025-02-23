@@ -13,7 +13,9 @@ const RideHistory = () => {
         {!rideHistory || rideHistory?.length < 1 ? (
           <h2>No results yet</h2>
         ) : (
-          rideHistory?.map((ride: Ride) => <RideCard ride={ride} />)
+          rideHistory?.map((ride: Ride) => (
+            <RideCard key={ride.id} ride={ride} />
+          ))
         )}
       </div>
       <div className="hidden lg:block">
